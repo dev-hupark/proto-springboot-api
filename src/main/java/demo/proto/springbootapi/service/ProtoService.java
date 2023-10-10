@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class ProtoService{
-    @Autowired
+    @Autowired(required=false)
     public ProtoMapper mapper;
 
     public List<ProtoVO> selectProto() {
