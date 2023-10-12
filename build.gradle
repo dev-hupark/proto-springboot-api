@@ -31,6 +31,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.session:spring-session-jdbc'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
+	// db
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+
 	// jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	// mustache
@@ -40,7 +43,7 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	// h2
 	runtimeOnly 'com.h2database:h2'
 
