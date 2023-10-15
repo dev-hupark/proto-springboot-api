@@ -13,11 +13,6 @@ cache:
 
 script: "./gradlew clean build"
 
-notifications:
-  email:
-    recipients:
-      - dev.hupark@gmail.com
-
 before_deploy:
   - zip -r proto-springboot-api
   - mkdir -p deploy
@@ -32,3 +27,18 @@ deploy:
     skip_cleanup: true
     acl: private
     local_dir: deploy
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: dev-hupark
+    key: proto-springboot-api.zip
+    bundle_type: zip
+    application: dev-hupark
+    deployment_group: dev-hupark-group
+    region: ap-northeast-2
+
+notifications:
+  email:
+    recipients:
+      - dev.hupark@gmail.com
