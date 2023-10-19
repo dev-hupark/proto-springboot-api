@@ -2,10 +2,6 @@ language: java
 jdk:
   - openjdk17
 
-branches:
-  only:
-    - main
-
 cache:
   directories:
     - '$HOME/.m2/repository'
