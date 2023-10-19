@@ -14,7 +14,7 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip proto-springboot-api
+  - zip -r proto-springboot-api
   - mkdir -p deploy
   - mv proto-springboot-api deploy/proto-springboot-api.zip
 
