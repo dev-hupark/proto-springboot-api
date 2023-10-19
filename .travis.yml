@@ -4,7 +4,7 @@ jdk:
   
 branches:
  only:
-   - master
+   - main
    
 cache:
   directories:
@@ -14,7 +14,7 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r proto-springboot-api
+  - zip proto-springboot-api
   - mkdir -p deploy
   - mv proto-springboot-api deploy/proto-springboot-api.zip
 
