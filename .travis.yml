@@ -27,8 +27,7 @@ deploy:
     skip_cleanup: true
     acl: private
     local_dir: deploy
-    on:
-      branch: main
+    on: all_branches: true
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
@@ -39,8 +38,7 @@ deploy:
     application: dev-hupark
     deployment_group: dev-hupark-group
     region: ap-northeast-2
-    on:
-      branch: main
+    on: all_branches: true
 
 notifications:
   email:
