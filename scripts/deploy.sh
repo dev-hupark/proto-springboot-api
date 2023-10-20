@@ -34,5 +34,6 @@ echo "> jar 실행"
 
 nohup java -jar \
         -Dspring.config.location=classpath:/,file:$REPOSITORY/config/ \
-        -DSpring.profiles.active=real \
         $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+
+# -DSpring.profiles.active=real \
