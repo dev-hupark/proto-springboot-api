@@ -26,8 +26,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/css/**", "/images/**"
-                                , "/js/**", "/h2-console/**").permitAll() // , "/profile"
+                        .requestMatchers("/", "/profile"
+                                , "/css/**", "/images/**"
+                                , "/js/**", "/h2-console/**").permitAll()
                         .requestMatchers("/api/v1/**").hasRole(Role.USER.name())
                         .anyRequest().authenticated()
                 )
