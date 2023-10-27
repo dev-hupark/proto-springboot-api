@@ -1,11 +1,11 @@
 language: java
 jdk:
   - openjdk17
-
+  
 branches:
-  only:
-    - main
-
+ only:
+   - main
+   
 cache:
   directories:
     - '$HOME/.m2/repository'
@@ -14,9 +14,13 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r proto-springboot-api
-  - mkdir -p deploy
-  - mv proto-springboot-api deploy/proto-springboot-api.zip
+  - mkdir -p before-deploy # zip에 포함시킬 파일들을 담을 디렉토리 생성
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy * # before-deploy로 이동후 전체 압축
+  - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동후 deploy 디렉토리 생성
+  - mv before-deploy/before-deploy.zip deploy/proto-springboot-api.zip # deploy로 zip파일 이동
 
 deploy:
   - provider: s3
@@ -27,6 +31,8 @@ deploy:
     skip_cleanup: true
     acl: private
     local_dir: deploy
+    on:
+      all_branches: true
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
@@ -37,6 +43,8 @@ deploy:
     application: dev-hupark
     deployment_group: dev-hupark-group
     region: ap-northeast-2
+    on:
+      all_branches: true
 
 notifications:
   email:
